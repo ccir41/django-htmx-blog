@@ -1,1 +1,34 @@
 /* your styles go here */
+
+.navbar .search-area-input input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: none;
+  padding: 10px 0;
+  font-weight: 500;
+  font-size: medium;
+}
+
+.navbar .search-area-input input:focus {
+  border-color: #939597;
+  box-shadow: none;
+}
+
+.navbar-brand {
+  font-size: x-large !important;
+  font-weight: 900 !important;
+}
+
+.nav-item a {
+  font-size: medium !important;
+  font-weight: 700 !important;
+}
+
+.asteriskField {
+  color: red !important;
+}
+
+form label {
+  font-weight: 500;
+}
