@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow my-2">
+                <div class="row p-3">
+                    <div class="col-md-12">
+                        <h4 class="text-center mt-2">Register</h4>
+                        <hr class="w-25" />
+                    </div>
+                    <div class="col-md-12">
+                        <form action="{% url 'user:register' %}" method="POST">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {{ field|as_crispy_field }}
+                            {% endfor %}
+                            <button class="btn btn-primary pull-right mb-2" type="submit">Register</button>
+                        </form>
+                        <div>
+                            <p class="text-xs-center">
+                                <a href="#">Already have a account?</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

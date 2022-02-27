@@ -1,4 +1,7 @@
 from django import forms
+from django.urls import reverse_lazy
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 from .models import User
 
@@ -16,6 +19,14 @@ class SignUpForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for fieldname in ['username', ]:
             self.fields[fieldname].help_text = None
+        self.helper = FormHelper(self)
+        self.helper.form_id = 'register-form'
+        self.helper.attrs = {
+            'hx-post': reverse_lazy('user:register'),
+            'hx-target': '#register-form',
+            'hx-swap': 'outerHTML'
+        }
+        self.helper.add_input(Submit('submit', 'Register'))
 
     password = forms.CharField(
         min_length=8,
@@ -39,6 +50,20 @@ class SignUpForm(forms.ModelForm):
             'password',
             'confirm_password'
         )
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'hx-get': reverse_lazy('user:check-username'),
+                'hx-target': '#div_id_username',
+                'hx-trigger': 'keyup[target.value.length > 3]'
+            }),
+        }
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) <= 3:
+            raise forms.ValidationError("Username is too short")
+        return username
+
 
     def clean(self):
         cleaned_data = super().clean()

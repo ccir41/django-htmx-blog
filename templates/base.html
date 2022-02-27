@@ -42,16 +42,21 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
     <!-- Favicon-->
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script
-    ><![endif]-->
+    
   </head>
-  <body>
-    {% include './navbar.html' %}
-    {% block content %}{% endblock content %} 
-    {%include './footer.html' %}
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    
+    <div id="navbars">
+      {% include './navbar.html' %}
+    </div>
+    
+    <div id="root">
+      {% block content %}
+        {% include './index.html' %}
+      {% endblock %}
+    </div>
+    
+    {% include './footer.html' %}
 
     <!-- JavaScript files-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -59,42 +64,9 @@
     <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'vendor/jquery.cookie/jquery.cookie.js' %}"></script>
     <script src="{% static 'vendor/@fancyapps/fancybox/jquery.fancybox.min.js' %}"></script>
-    <script src="{% static 'vendor/toastr/js/toastr.min.js' %}" />
+    <script src="{% static 'vendor/toastr/js/toastr.min.js' %}"></script>
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
     <script src="{% static 'js/front.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
-    <script>
-      toastr.options = {
-        "closeButton": true,
-        "debug": true,
-        "newestOnTop": true,
-        "progressBar": true,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-      }
-      $(function() {
-        $(".toastMessage").on("click", function() {
-          var name = $(this).attr('name');
-          var message = $(this).text();
-          if (name == 'error') {
-            toastr.error(message);
-          } else if (name == 'success') {
-            toastr.success(message);
-          } else if (name == 'warning') {
-            toastr.warning(message);
-          } else if (name == 'info') {
-            toastr.info(message);
-          }
-        });
-        $(".toastMessage").click(); 
-      });
-    </script>
   </body>
 </html>

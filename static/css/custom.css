@@ -23,6 +23,7 @@
 .nav-item a {
   font-size: medium !important;
   font-weight: 700 !important;
+  cursor: pointer !important;
 }
 
 .asteriskField {
