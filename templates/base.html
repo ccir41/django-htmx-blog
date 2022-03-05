@@ -1,7 +1,5 @@
 {% load static %}
 
-{% load crispy_forms_tags %}
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,15 +45,13 @@
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     
   </head>
-  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <body>
     
     <div id="navbars">
       {% include './navbar.html' %}
     </div>
 
-    <div id="modalform">
-      {% include './modal.html' %}
-    </div>
+    <div id="modalform"></div>
     
     <div id="root">
       {% block content %}

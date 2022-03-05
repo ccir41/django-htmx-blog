@@ -15,15 +15,14 @@
         <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
       </div>
       <div class="modal-body">
-            <form hx-post="{% url 'user:login' %}" hx-target="#navbars">
-                {% csrf_token %}
+            <form hx-post="{% url 'user:login' %}" hx-target="#navbars" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
                 <div class="row">
                     {% if form %}
                         <div class="col-md-12">{{form.username|as_crispy_field}}</div>
                         <div class="col-md-12">{{form.password|as_crispy_field}}</div>
                     {% endif %}
                 </div>
-                <button class="btn btn-primary">Login</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Login</button>
             </form>
         </div>
     </div>

@@ -28,7 +28,6 @@ class Login(View):
                     template = render(request, 'navbar.html', {'message': message, 'user': user})
                     return template
                 else:
-                    # form = SignInForm()
                     message = mark_safe("""<button class="toastMessage d-none" name="error">Invalid Username or Password!</button>""")
                     return render(request, 'navbar.html', {'message': message, 'form': form})
     
@@ -37,7 +36,9 @@ class Login(View):
         if request.htmx:
             # return render(request, 'user/fragments/login.html', {'form': form})
             template = render(request, 'modal.html', {'form': form})
-            return HttpResponse(template)
+            template['Hx-Swap'] = "outerHTML"
+            template['Hx-Target'] = "#modalform"
+            return template
             # return template
             # return render(request, 'modal.html', {'form': form})
         else:
