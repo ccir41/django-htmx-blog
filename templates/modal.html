@@ -1,0 +1,31 @@
+{% load crispy_forms_tags %}
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
+      </div>
+      <div class="modal-body">
+            <form hx-post="{% url 'user:login' %}" hx-target="#navbars">
+                {% csrf_token %}
+                <div class="row">
+                    {% if form %}
+                        <div class="col-md-12">{{form.username|as_crispy_field}}</div>
+                        <div class="col-md-12">{{form.password|as_crispy_field}}</div>
+                    {% endif %}
+                </div>
+                <button class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>

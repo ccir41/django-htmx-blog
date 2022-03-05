@@ -25,22 +25,27 @@ class Login(View):
                 if user is not None:
                     login(request, user)
                     message = mark_safe("""<button class="toastMessage d-none" name="success">Successfully Logged In!</button>""")
-                    return render(request, 'index.html', {'message': message, 'user': user})
+                    template = render(request, 'navbar.html', {'message': message, 'user': user})
+                    return template
                 else:
-                    form = SignInForm()
+                    # form = SignInForm()
                     message = mark_safe("""<button class="toastMessage d-none" name="error">Invalid Username or Password!</button>""")
-                    return render(request, 'user/login.html', {'message': message, 'form': form})
+                    return render(request, 'navbar.html', {'message': message, 'form': form})
     
     def get(self, request, *args, **kwrgs):
         form = SignInForm()
         if request.htmx:
-            return render(request, 'user/fragments/login.html', {'form': form})
+            # return render(request, 'user/fragments/login.html', {'form': form})
+            template = render(request, 'modal.html', {'form': form})
+            return HttpResponse(template)
+            # return template
+            # return render(request, 'modal.html', {'form': form})
         else:
             return render(request, 'user/login.html', {'form': form})
 
 
 class Logout(LoginRequiredMixin, View):
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         if request.htmx:
             logout(request)
             message = mark_safe("""<button class="toastMessage d-none" name="info">You are Logged Out!</button>""")

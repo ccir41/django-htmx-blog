@@ -41,14 +41,14 @@
             <a href="{% url 'core:home' %}" class="nav-link">Profile</a>
           </li>
           <li class="nav-item">
-            <a hx-post="{% url 'user:logout' %}" hx-push-url="{% url 'core:home' %}" hx-target="#navbars" class="nav-link">Logout</a>
+            <a hx-get="{% url 'user:logout' %}" hx-push-url="{% url 'core:home' %}" hx-target="#navbars" class="nav-link">Logout</a>
           </li>
           {% else %}
           <li class="nav-item">
             <a href="{% url 'user:register' %}" class="nav-link">Register</a>
           </li>
           <li class="nav-item">
-            <a hx-get="{% url 'user:login' %}" hx-push-url="{% url 'user:login' %}" hx-target="#root" class="nav-link">Login</a>
+            <a hx-get="{% url 'user:login' %}" hx-swap="outerHTML" hx-target="#modalform" data-toggle="modal" data-target="#exampleModalCenter" class="nav-link">Login</a>
           </li>
           {% endif %}
         </ul>

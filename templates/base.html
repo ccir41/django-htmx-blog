@@ -1,4 +1,7 @@
 {% load static %}
+
+{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -48,6 +51,10 @@
     
     <div id="navbars">
       {% include './navbar.html' %}
+    </div>
+
+    <div id="modalform">
+      {% include './modal.html' %}
     </div>
     
     <div id="root">
