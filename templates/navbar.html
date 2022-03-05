@@ -48,7 +48,7 @@
             <a href="{% url 'user:register' %}" class="nav-link">Register</a>
           </li>
           <li class="nav-item">
-            <a hx-get="{% url 'user:login' %}" hx-swap="outerHTML" hx-target="#modalform" data-toggle="modal" data-target="#exampleModalCenter" class="nav-link">Login</a>
+            <a hx-get="{% url 'user:login' %}" hx-swap="outerHTML" hx-target="#modalform" class="nav-link">Login</a>
           </li>
           {% endif %}
         </ul>

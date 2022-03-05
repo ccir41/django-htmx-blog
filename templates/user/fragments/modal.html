@@ -1,5 +1,11 @@
 {% load crispy_forms_tags %}
 
+{% load static %}
+
+<button id="triggerModalForm" type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModalCenter">
+  Modal Form
+</button>
+
 <!-- Modal -->
 <div
   class="modal fade"
@@ -28,3 +34,8 @@
     </div>
   </div>
 </div>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script>
+  $("#triggerModalForm").trigger('click');
+</script>

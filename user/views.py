@@ -34,13 +34,8 @@ class Login(View):
     def get(self, request, *args, **kwrgs):
         form = SignInForm()
         if request.htmx:
-            # return render(request, 'user/fragments/login.html', {'form': form})
-            template = render(request, 'modal.html', {'form': form})
-            template['Hx-Swap'] = "outerHTML"
-            template['Hx-Target'] = "#modalform"
+            template = render(request, 'user/fragments/modal.html', {'form': form})
             return template
-            # return template
-            # return render(request, 'modal.html', {'form': form})
         else:
             return render(request, 'user/login.html', {'form': form})
 
