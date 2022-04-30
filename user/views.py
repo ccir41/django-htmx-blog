@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -26,18 +27,21 @@ class Login(View):
                     login(request, user)
                     message = mark_safe("""<button class="toastMessage d-none" name="success">Successfully Logged In!</button>""")
                     template = render(request, 'navbar.html', {'message': message, 'user': user})
+                    template['HX-History-Restore-Request'] = True
                     return template
                 else:
                     message = mark_safe("""<button class="toastMessage d-none" name="error">Invalid Username or Password!</button>""")
                     return render(request, 'navbar.html', {'message': message, 'form': form})
+        else:
+            return redirect('core:home')
     
     def get(self, request, *args, **kwrgs):
         form = SignInForm()
         if request.htmx:
-            template = render(request, 'user/fragments/modal.html', {'form': form})
+            template = render(request, 'user/fragments/login.html', {'form': form})
             return template
         else:
-            return render(request, 'user/login.html', {'form': form})
+            return redirect('core:home')
 
 
 class Logout(LoginRequiredMixin, View):

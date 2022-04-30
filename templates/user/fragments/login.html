@@ -14,7 +14,7 @@
                         {% for field in form %}
                             {{ field|as_crispy_field }}
                         {% endfor %}
-                        <button class="btn btn-primary pull-right mb-2" type="submit" hx-post="{% url 'user:login' %}" hx-target="#root">Login</button>
+                        <button class="btn btn-primary pull-right mb-2" type="submit" hx-post="{% url 'user:login' %}" hx-target="#navbars">Login</button>
                     </form>
                     <div>
                         <p class="text-xs-center">
